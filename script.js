@@ -12,117 +12,157 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyHtmlBtn = document.getElementById('copyHtmlBtn');
     const copySignatureBtn = document.getElementById('copySignatureBtn');
     const copyStatus = document.getElementById('copyStatus');
-    // *** ADD Reference to Instructions Container ***
     const instructionsContainer = document.getElementById('instructionsContainer');
 
     // --- *** YOUR CUSTOMIZATION AREA START *** ---
 
-    // 1. Company Logo URL & Style
-    const companyLogoUrl = 'https://gaming.amplitudo.me/images/brand.svg';
+    // 1. Company Logo URL & Style (Points to repo image)
+    const companyLogoUrl = 'https://magmash.github.io/Amplitudo_email_signature/ikonice/amplitudo.png';
     const logoStyle = "width: 130px; max-width: 130px; height: auto; border: 0; display: block; margin-bottom: 12px;";
 
-    // 2. Define the HTML Signature Template Function (Remains the same)
+    // 2. Icon URLs and Styles
+    const iconBaseUrl = "https://magmash.github.io/Amplitudo_email_signature/ikonice/";
+    const linkedinIconUrl = `${iconBaseUrl}Linkedin.png`;
+    const facebookIconUrl = `${iconBaseUrl}Facebook.png`;
+    const instagramIconUrl = `${iconBaseUrl}Instagram.png`;
+    const phoneIconUrl = `${iconBaseUrl}Phone.png`;
+    const emailIconUrl = `${iconBaseUrl}Email.png`;
+    const addressIconUrl = `${iconBaseUrl}Address.png`;
+    const websiteIconUrl = `${iconBaseUrl}website.png`;
+    const bannerImageUrl = `${iconBaseUrl}banner.png`;
+
+    // Social Page URLs
+    const facebookPageUrl = "https://www.facebook.com/AmplitudoCG/";
+    const linkedinPageUrl = "https://me.linkedin.com/company/amplitudoo";
+    const instagramPageUrl = "https://www.instagram.com/amplitudo.me/?hl=en";
+    const xPageUrl = "https://twitter.com/amplitudocg?lang=en"; // Kept for reference if needed later
+
+    // Website URL
+    const websiteUrl = "https://amplitudo.me/";
+
+    // Define Icon Styles
+    const contactIconSize = "16px";
+    const contactIconStyle = `width: ${contactIconSize}; height: ${contactIconSize}; border: 0; vertical-align: middle;`;
+    const socialIconSize = "20px";
+    const socialIconStyle = `width: ${socialIconSize}; height: ${socialIconSize}; border: 0; vertical-align: middle;`;
+    // Define Banner Style
+    const bannerStyle = "display: block; max-width: 600px; width: 100%; height: auto; border: 0; margin-top: 15px;";
+    // Style for the link wrapping the banner
+    const bannerLinkStyle = "display: block; text-decoration: none;";
+
+
+    // 3. Define the HTML Signature Template Function (Banner Linked)
     function getSignatureTemplate(data) {
+        // Define Styles (Verdana, #384F63 text, #00B9AD accent)
         const baseFont = "font-family: Verdana, Geneva, sans-serif;";
-        const nameStyle = `${baseFont} font-size: 14pt; font-weight: 700; color: #211F54; line-height: 1.3; margin: 0 0 1px 0;`;
-        const titleStyle = `${baseFont} font-size: 10pt; font-weight: 400; color: #00B9AD; line-height: 1.3; margin: 0 0 12px 0;`;
-        const contactStyle = `${baseFont} font-size: 10pt; font-weight: 400; color: #211F54; line-height: 1.4; margin: 0;`;
-        const contactLinkStyle = `${contactStyle} color: #211F54; text-decoration: none;`;
-        const iconCellStyle = "width: 20px; padding-right: 6px; vertical-align: middle;";
-        const iconStyle = `${baseFont} font-size: 10pt; font-weight: 700; color: #00B9AD;`;
-        const rightColStyle = `${baseFont} font-size: 10pt; font-weight: 400; color: #211F54; line-height: 1.5; margin: 0 0 4px 0;`;
+        const baseFontSize = "font-size: 9pt;";
+        const primaryColor = "#384F63;";
+        const accentColor = "#00B9AD;";
+        const lightGrayBorder = "#E5E7EB;";
+
+        const nameStyle = `${baseFont} font-size: 14pt; font-weight: 700; color: ${primaryColor} line-height: 1.3; margin: 0 0 1px 0;`;
+        const titleStyle = `${baseFont} font-size: 10pt; font-weight: 400; color: ${accentColor} line-height: 1.3; margin: 0 0 12px 0; text-transform: uppercase;`;
+        const contactStyle = `${baseFont} ${baseFontSize} font-weight: 400; color: ${primaryColor} line-height: 1.4; margin: 0;`;
+        const contactLinkStyle = `color: ${primaryColor} text-decoration: none;`;
+        const iconCellStyle = `width: ${contactIconSize}; padding-right: 8px; vertical-align: middle;`;
+        const socialLinkStyle = `color: #4B5563; text-decoration: none; ${baseFont} font-size: 10pt; vertical-align: middle;`;
 
         const fixedAddress = "Bulevar knjaza Danila Petrovića 13/32,<br>Podgorica, Montenegro";
         const fixedPhoneRight = "+382 20 223 244";
+        const websiteText = "amplitudo.me";
 
+        // Build social icons HTML string (Icon + Text, X removed)
+        const socialIconsHtml = `
+          <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
+            <tr><td style="padding: 2px 8px 2px 0; vertical-align: middle;"><a href="${linkedinPageUrl}" target="_blank"><img src="${linkedinIconUrl}" alt="LinkedIn" style="${socialIconStyle}"></a></td><td style="padding: 2px 0; vertical-align: middle;"><a href="${linkedinPageUrl}" target="_blank" style="${socialLinkStyle}">LinkedIn</a></td></tr>
+            <tr><td style="padding: 2px 8px 2px 0; vertical-align: middle;"><a href="${facebookPageUrl}" target="_blank"><img src="${facebookIconUrl}" alt="Facebook" style="${socialIconStyle}"></a></td><td style="padding: 2px 0; vertical-align: middle;"><a href="${facebookPageUrl}" target="_blank" style="${socialLinkStyle}">Facebook</a></td></tr>
+            <tr><td style="padding: 2px 8px 2px 0; vertical-align: middle;"><a href="${instagramPageUrl}" target="_blank"><img src="${instagramIconUrl}" alt="Instagram" style="${socialIconStyle}"></a></td><td style="padding: 2px 0; vertical-align: middle;"><a href="${instagramPageUrl}" target="_blank" style="${socialLinkStyle}">Instagram</a></td></tr>
+          </table>
+        `;
+
+        // Structure with main table and linked banner below
         return `
-<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; background-color: #FFFFFF; max-width: 580px; width: 100%; font-size: 10pt;">
-  <tr>
-    <td style="padding: 15px; vertical-align: top; width: 58%;">
-      <p style="${nameStyle}">${data.fullName}</p>
-      <p style="${titleStyle}">${data.jobTitle}</p>
-      <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
-        <tr>
-          <td style="${iconCellStyle}"><span style="${iconStyle}">P:</span></td>
-          <td style="vertical-align: middle;"><p style="${contactStyle}">${data.phone}</p></td>
-        </tr>
-         <tr><td colspan="2" style="height: 6px; line-height: 6px;"> </td></tr>
-        <tr>
-           <td style="${iconCellStyle}"><span style="${iconStyle}">E:</span></td>
-           <td style="vertical-align: middle;"><a href="mailto:${data.email}" style="${contactLinkStyle}">${data.email}</a></td>
-        </tr>
-        <tr><td colspan="2" style="height: 6px; line-height: 6px;"> </td></tr>
-         <tr>
-           <td style="${iconCellStyle}"><span style="${iconStyle}">A:</span></td>
-           <td style="vertical-align: middle;"><p style="${contactStyle}">${fixedAddress}</p></td>
-         </tr>
-      </table>
-    </td>
-    <td style="width: 1px; background-color: #EEEEEE;"> </td>
-    <td style="padding: 15px; vertical-align: top; width: 40%; text-align: left;">
-       ${data.logoHtml ? data.logoHtml : ''}
-       <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin-bottom: 12px;">
-         <tr>
-           <td style="${iconCellStyle}"><span style="${iconStyle}">T:</span></td>
-           <td style="vertical-align: middle;"><p style="${contactStyle}">${fixedPhoneRight}</p></td>
-         </tr>
-       </table>
-       <p style="${rightColStyle}">LinkedIn</p>
-       <p style="${rightColStyle}">Facebook</p>
-       <p style="${rightColStyle}">Instagram</p>
-       <p style="${rightColStyle}">Twitter</p>
-    </td>
-  </tr>
-</table>`;
+<div> <!-- Outer div for structure -->
+  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; background-color: #FFFFFF; max-width: 580px; width: 100%; font-size: 10pt; ${baseFont}">
+    <tr>
+      <!-- Left Column: Info -->
+      <td style="padding: 15px; vertical-align: top; width: 57%;">
+        <p style="${nameStyle}">${data.fullName}</p>
+        <p style="${titleStyle}">${data.jobTitle}</p>
+        <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
+          <tr><td style="${iconCellStyle}"><img src="${phoneIconUrl}" alt="P" style="${contactIconStyle}"></td><td style="vertical-align: middle;"><p style="${contactStyle}">${data.phone}</p></td></tr>
+          <tr><td colspan="2" style="height: 6px; line-height: 6px;"> </td></tr>
+          <tr><td style="${iconCellStyle}"><img src="${emailIconUrl}" alt="E" style="${contactIconStyle}"></td><td style="vertical-align: middle;"><a href="mailto:${data.email}" style="${contactLinkStyle} ${contactStyle}">${data.email}</a></td></tr>
+          <tr><td colspan="2" style="height: 6px; line-height: 6px;"> </td></tr>
+          <tr><td style="${iconCellStyle}"><img src="${addressIconUrl}" alt="A" style="${contactIconStyle}"></td><td style="vertical-align: middle;"><p style="${contactStyle}">${fixedAddress}</p></td></tr>
+        </table>
+      </td>
+      <!-- Vertical Divider -->
+      <td style="width: 1px; padding: 0; background-color: ${lightGrayBorder};"><div style="width:1px; line-height: 1px; font-size: 1px;"> </div></td>
+      <!-- Right Column: Logo & Static Info -->
+      <td style="padding: 15px 15px 15px 30px; vertical-align: top; width: 42%; text-align: left;">
+         ${data.logoHtml ? data.logoHtml : ''}
+         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin-bottom: 6px;">
+           <tr><td style="${iconCellStyle}"><img src="${phoneIconUrl}" alt="T" style="${contactIconStyle}"></td><td style="vertical-align: middle;"><p style="${contactStyle}">${fixedPhoneRight}</p></td></tr>
+         </table>
+         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin-bottom: 12px;">
+             <tr>
+                 <td style="${iconCellStyle}"><a href="${websiteUrl}" target="_blank"><img src="${websiteIconUrl}" alt="W" style="${contactIconStyle}"></a></td>
+                 <td style="vertical-align: middle;"><a href="${websiteUrl}" target="_blank" style="${contactLinkStyle} ${contactStyle}">${websiteText}</a></td>
+             </tr>
+         </table>
+         ${socialIconsHtml}
+      </td>
+    </tr>
+  </table>
+  <!-- *** ADDED Link Around Banner Image *** -->
+  <div>
+     <a href="${websiteUrl}" target="_blank" style="${bannerLinkStyle}">
+        <img src="${bannerImageUrl}" alt="Amplitudo Banner" style="${bannerStyle}">
+     </a>
+  </div>
+</div> <!-- End Outer div -->
+        `;
     }
     // --- *** YOUR CUSTOMIZATION AREA END *** ---
 
     // Helper function to transliterate Montenegrin characters to basic Latin
     function transliterate(text) {
-        const charMap = {
-            'ć': 'c', 'č': 'c', 'š': 's', 'ž': 'z', 'đ': 'dj',
-            'Ć': 'C', 'Č': 'C', 'Š': 'S', 'Ž': 'Z', 'Đ': 'Dj'
-        };
+        const charMap = {'ć':'c','č':'c','š':'s','ž':'z','đ':'dj','Ć':'C','Č':'C','Š':'S','Ž':'Z','Đ':'Dj'};
         let result = text;
-        for (const [key, value] of Object.entries(charMap)) {
-            result = result.replace(new RegExp(key, 'g'), value);
-        }
+        for (const [key, value] of Object.entries(charMap)) { result = result.replace(new RegExp(key, 'g'), value); }
         return result;
     }
 
     // Helper function to capitalize first letter of each word
     function capitalizeFullName(fullName) {
          if (!fullName) return '';
-         return fullName.split(' ')
-                        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                        .join(' ');
+         return fullName.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
     }
 
     // --- Event Listeners ---
     generateBtn.addEventListener('click', generateSignature);
     copySignatureBtn.addEventListener('click', copySignaturePreview);
     copyHtmlBtn.addEventListener('click', copyHtmlCode);
+    if (phoneInput) { phoneInput.addEventListener('input', () => { phoneInput.value = phoneInput.value.replace(/[^0-9\+\-\s\(\)xX]/g, ''); }); }
 
     // --- Functions ---
-    function generateSignature() {
+    // (generateSignature, copy functions, status functions remain the same)
+     function generateSignature() {
         clearCopyStatus();
-        console.log("Generate button clicked");
-
         const fullNameRaw = fullNameInput.value.trim();
-        const jobTitle = jobTitleInput.value.trim();
+        const jobTitleRaw = jobTitleInput.value.trim();
         const phone = phoneInput.value.trim();
 
-        if (!fullNameRaw || !jobTitle || !phone) {
+        if (!fullNameRaw || !jobTitleRaw || !phone) {
             alert('Please fill in all fields (Full Name, Job Title, Phone Number).');
             return;
         }
-
         const nameParts = fullNameRaw.split(' ').filter(part => part.length > 0);
         if (nameParts.length < 2) {
             alert('Please enter at least a first name and a surname.');
             return;
         }
-
         const firstNameForEmail = nameParts[0];
         const surnameForEmail = nameParts[nameParts.length - 1];
         const transliteratedFirstName = transliterate(firstNameForEmail).toLowerCase();
@@ -130,10 +170,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const emailPrefix = `${transliteratedFirstName}.${transliteratedSurname}`;
         const fullEmail = `${emailPrefix}@amplitudo.me`;
         const displayFullName = capitalizeFullName(fullNameRaw);
+        const displayJobTitle = jobTitleRaw.toUpperCase();
 
         const employeeData = {
             fullName: displayFullName,
-            jobTitle: jobTitle,
+            jobTitle: displayJobTitle,
             phone: phone,
             email: fullEmail,
             logoHtml: companyLogoUrl ? `<img src="${companyLogoUrl}" alt="Company Logo" style="${logoStyle}">` : ''
@@ -143,26 +184,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const finalSignatureHtml = getSignatureTemplate(employeeData);
             signaturePreview.innerHTML = finalSignatureHtml;
             signatureHtml.value = finalSignatureHtml;
-
-            // *** SHOW BOTH OUTPUT AND INSTRUCTIONS ***
-            if (outputContainer) {
-                outputContainer.style.display = 'block';
-            } else {
-                console.error("Output container element not found!");
-            }
-            if (instructionsContainer) {
-                instructionsContainer.style.display = 'block';
-            } else {
-                console.error("Instructions container element not found!");
-            }
-
+            if (outputContainer) outputContainer.style.display = 'block';
+            if (instructionsContainer) instructionsContainer.style.display = 'block';
         } catch (error) {
              console.error("Error during signature generation:", error);
              alert("An error occurred while generating the signature. Please check the console for details.");
         }
-    } // End generateSignature
+    }
 
-    // (copySignaturePreview, copyHtmlCode, setCopyStatus, clearCopyStatus functions remain the same)
     function copySignaturePreview() {
         clearCopyStatus();
         const range = document.createRange();
