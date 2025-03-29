@@ -35,21 +35,22 @@ body {
 .container {
     max-width: 760px;
     margin: 2.5rem auto;
-    padding: 0 1rem;
+    padding: 0 1rem; /* Default horizontal padding */
     flex-grow: 1;
     width: 100%;
+    box-sizing: border-box; /* Include padding in width calculation */
 }
 
 /* --- Page Title Area Styles --- */
 .page-title-area {
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .page-logo {
     height: 35px;
     width: auto;
     display: block;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .page-text-block {
@@ -60,8 +61,7 @@ body {
     font-size: 1.6rem;
     font-weight: 600;
     color: #1F2937;
-    /* *** REDUCED MARGIN BOTTOM *** */
-    margin: 0 0 0.25rem 0; /* Smaller bottom margin */
+    margin: 0 0 0.1rem 0;
     text-align: left;
 }
 
@@ -137,7 +137,7 @@ body {
     box-shadow: 0 0 0 3px rgba(0, 185, 173, 0.15);
 }
 
-.form-group small { /* Style for phone format explanation */
+.form-group small {
     font-size: 0.8rem;
     color: #718096;
     margin-top: 0.25rem;
@@ -146,7 +146,6 @@ body {
 
 
 /* --- Buttons --- */
-/* Button styles remain the same */
 .button-primary, .button-secondary {
     display: inline-flex;
     align-items: center;
@@ -209,7 +208,6 @@ body {
 
 
 /* --- Output Section --- */
-/* Output styles remain the same */
 .output-section {
     border-top: 3px solid var(--accent-color);
 }
@@ -226,7 +224,7 @@ body {
     border: 1px dashed var(--dark-gray);
     padding: 1rem;
     background-color: #ffffff;
-    overflow-x: auto;
+    overflow-x: auto; /* Allows horizontal scrolling if signature is too wide */
     overflow-wrap: break-word;
     word-wrap: break-word;
     border-radius: 4px;
@@ -273,7 +271,6 @@ body {
 }
 
 /* --- Instructions / Accordion Section --- */
-/* Accordion styles remain the same */
 .instructions-section {
     margin-top: 2.5rem;
 }
@@ -358,4 +355,101 @@ body {
     color: #6B7280;
     background-color: #F3F4F6;
     border-top: 1px solid var(--medium-gray);
+}
+
+
+/* --- *** MOBILE RESPONSIVENESS *** --- */
+@media (max-width: 768px) { /* Adjust breakpoint as needed */
+
+    .container {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        padding: 0 0.75rem; /* Reduce horizontal padding */
+    }
+
+    .page-title-area {
+        margin-bottom: 1.5rem;
+    }
+    .page-logo {
+        height: 30px;
+        margin-bottom: 0.75rem;
+    }
+    .page-title {
+        font-size: 1.4rem;
+    }
+    .intro-text {
+        font-size: 0.95rem;
+    }
+
+    .card {
+        padding: 1.5rem; /* Reduce card padding */
+        margin-bottom: 1.5rem;
+    }
+    .card h2 {
+        font-size: 1.2rem;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.75rem;
+    }
+
+    .form-grid {
+        /* Stack form elements vertically */
+        grid-template-columns: 1fr;
+        gap: 1rem; /* Reduce gap */
+        margin-bottom: 1.25rem;
+    }
+
+    .button-primary, .button-secondary {
+        font-size: 0.9rem;
+        padding: 0.7rem 1.25rem;
+    }
+    .button-group {
+        gap: 0.5rem;
+    }
+
+    #signaturePreviewWrapper {
+        padding: 0.75rem;
+    }
+    .signature-box {
+        padding: 0.75rem;
+    }
+
+    .accordion-header {
+        padding: 0.8rem 1rem;
+        font-size: 0.95rem;
+    }
+     .accordion-header::after {
+        right: 1rem;
+    }
+    .accordion-content {
+        padding: 0.5rem 1rem 1rem 1rem;
+        font-size: 0.9rem;
+    }
+     .accordion-content ol {
+        padding-left: 1.2rem;
+    }
+
+     .app-footer {
+         margin-top: 2rem;
+         padding: 1rem;
+     }
+
+}
+
+@media (max-width: 480px) { /* Even smaller screens */
+     .page-title {
+        font-size: 1.3rem;
+    }
+     .card h2 {
+        font-size: 1.1rem;
+    }
+    .card {
+        padding: 1rem;
+    }
+     .button-primary, .button-secondary {
+        width: 100%; /* Make buttons full width */
+        justify-content: center;
+    }
+     .button-group {
+        flex-direction: column; /* Stack copy buttons */
+    }
 }
