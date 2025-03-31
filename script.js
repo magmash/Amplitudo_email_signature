@@ -18,9 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. Company Logo URL & Style (Points to repo image)
     const companyLogoUrl = 'https://magmash.github.io/Amplitudo_email_signature/ikonice/amplitudo.png';
-    // Define desired display width for logos (used in attributes and styles)
-    const companyLogoWidth = "130"; // Width in pixels (as string for attribute)
-    const logoStyle = `width: ${companyLogoWidth}px; max-width: ${companyLogoWidth}px; height: auto; border: 0; display: block; margin-bottom: 12px; -ms-interpolation-mode: bicubic; /* Smoother resize in Outlook */`;
+    // Keep logo width reasonable relative to new signature width
+    const companyLogoWidth = "120"; // Reduced slightly from 130
+    const logoStyle = `width: ${companyLogoWidth}px; max-width: ${companyLogoWidth}px; height: auto; border: 0; display: block; margin-bottom: 10px; -ms-interpolation-mode: bicubic;`; // Reduced margin
 
     // 2. Icon URLs and Styles
     const iconBaseUrl = "https://magmash.github.io/Amplitudo_email_signature/ikonice/";
@@ -40,42 +40,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const websiteUrl = "https://amplitudo.me/";
 
     // Define Icon Styles & Attributes
-    const contactIconSize = "16"; // Size as string for attributes
+    const contactIconSize = "14"; // Slightly smaller contact icons
     const contactIconStyle = `width: ${contactIconSize}px; height: ${contactIconSize}px; border: 0; vertical-align: middle; -ms-interpolation-mode: bicubic;`;
-    const socialIconSize = "20"; // Size as string for attributes
+    const socialIconSize = "18"; // Slightly smaller social icons
     const socialIconStyle = `width: ${socialIconSize}px; height: ${socialIconSize}px; border: 0; vertical-align: middle; -ms-interpolation-mode: bicubic;`;
-    // Define Banner Style & Attributes
-    const bannerMaxWidth = "580"; // Match max-width of main table
-    const bannerStyle = `display: block; max-width: ${bannerMaxWidth}px; width: 100%; height: auto; border: 0; margin-top: 15px; -ms-interpolation-mode: bicubic;`;
+
+    // Define Banner Style & Attributes - matching new max-width
+    // *** REDUCED MAX WIDTH ***
+    const signatureMaxWidth = "500"; // Reduced from 580
+    const bannerStyle = `display: block; max-width: ${signatureMaxWidth}px; width: 100%; height: auto; border: 0; margin-top: 12px; -ms-interpolation-mode: bicubic;`; // Reduced margin
     const bannerLinkStyle = "display: block; text-decoration: none;";
 
 
-    // 3. Define the HTML Signature Template Function (Compatibility Enhancements)
+    // 3. Define the HTML Signature Template Function (Narrower Layout)
     function getSignatureTemplate(data) {
         // Define Styles
         const baseFont = "font-family: Verdana, Geneva, sans-serif;";
-        const baseFontSize = "font-size: 9pt;";
+        const baseFontSize = "font-size: 8.5pt;"; // Slightly smaller base font
         const primaryColor = "#384F63;";
         const accentColor = "#00B9AD;";
         const lightGrayBorder = "#E5E7EB;";
 
-        const nameStyle = `${baseFont} font-size: 14pt; font-weight: 700; color: ${primaryColor} line-height: 1.3; margin: 0 0 1px 0;`;
-        const titleStyle = `${baseFont} font-size: 10pt; font-weight: 400; color: ${accentColor} line-height: 1.3; margin: 0 0 12px 0; text-transform: uppercase;`;
+        const nameStyle = `${baseFont} font-size: 13pt; font-weight: 700; color: ${primaryColor} line-height: 1.3; margin: 0 0 1px 0;`; // Slightly smaller name
+        const titleStyle = `${baseFont} font-size: 9pt; font-weight: 400; color: ${accentColor} line-height: 1.3; margin: 0 0 10px 0; text-transform: uppercase;`; // Slightly smaller title
         const contactStyle = `${baseFont} ${baseFontSize} font-weight: 400; color: ${primaryColor} line-height: 1.4; margin: 0;`;
         const contactLinkStyle = `color: ${primaryColor} text-decoration: none;`;
-        const iconCellStyle = `width: ${contactIconSize}px; padding-right: 8px; vertical-align: middle; line-height: 1; /* Helps some clients with image spacing */`;
-        const socialLinkStyle = `color: #4B5563; text-decoration: none; ${baseFont} font-size: 10pt; vertical-align: middle;`;
+        const iconCellStyle = `width: ${contactIconSize}px; padding-right: 6px; vertical-align: middle; line-height: 1;`; // Reduced padding right slightly
+        const socialLinkStyle = `color: #4B5563; text-decoration: none; ${baseFont} font-size: 9pt; vertical-align: middle;`; // Matched base font size
 
         const fixedAddress = "Bulevar knjaza Danila Petrovića 13/32,<br>Podgorica, Montenegro";
         const fixedPhoneRight = "+382 20 223 244";
         const websiteText = "amplitudo.me";
 
         // Build social icons HTML string
-        // Added MSO spacing styles
         const socialIconsHtml = `
           <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
             <tr>
-              <td style="padding: 2px 8px 2px 0; vertical-align: middle; line-height: 1;">
+              <td style="padding: 2px 6px 2px 0; vertical-align: middle; line-height: 1;"> <!-- Reduced padding -->
                 <a href="${linkedinPageUrl}" target="_blank">
                   <img src="${linkedinIconUrl}" alt="LinkedIn" width="${socialIconSize}" height="${socialIconSize}" style="${socialIconStyle}">
                 </a>
@@ -85,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
               </td>
             </tr>
             <tr>
-              <td style="padding: 2px 8px 2px 0; vertical-align: middle; line-height: 1;">
+              <td style="padding: 2px 6px 2px 0; vertical-align: middle; line-height: 1;"> <!-- Reduced padding -->
                 <a href="${facebookPageUrl}" target="_blank">
                   <img src="${facebookIconUrl}" alt="Facebook" width="${socialIconSize}" height="${socialIconSize}" style="${socialIconStyle}">
                 </a>
@@ -95,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
               </td>
             </tr>
             <tr>
-              <td style="padding: 2px 8px 2px 0; vertical-align: middle; line-height: 1;">
+              <td style="padding: 2px 6px 2px 0; vertical-align: middle; line-height: 1;"> <!-- Reduced padding -->
                  <a href="${instagramPageUrl}" target="_blank">
                    <img src="${instagramIconUrl}" alt="Instagram" width="${socialIconSize}" height="${socialIconSize}" style="${socialIconStyle}">
                  </a>
@@ -107,16 +108,17 @@ document.addEventListener('DOMContentLoaded', () => {
           </table>
         `;
 
-        // Main Structure: Outer wrapper, main signature table, banner link/image
+        // Main Structure: Reduced max-width and padding
         return `
-<div style="${baseFont} ${baseFontSize}"> <!-- Ensure base font styles apply -->
-  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse; background-color: #FFFFFF; max-width: 580px; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+<div style="${baseFont} ${baseFontSize}">
+  <!-- *** REDUCED MAX-WIDTH *** -->
+  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse; background-color: #FFFFFF; max-width: ${signatureMaxWidth}px; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
     <tr>
       <!-- Left Column: Info -->
-      <td width="57%" style="padding: 15px; vertical-align: top; width: 57%;">
+      <!-- *** REDUCED PADDING *** -->
+      <td width="57%" style="padding: 12px; vertical-align: top; width: 57%;">
         <p style="${nameStyle}">${data.fullName}</p>
         <p style="${titleStyle}">${data.jobTitle}</p>
-        <!-- Contact Info Table -->
         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
           <tr>
              <td style="${iconCellStyle}">
@@ -124,14 +126,14 @@ document.addEventListener('DOMContentLoaded', () => {
              </td>
              <td style="vertical-align: middle;"><p style="${contactStyle}">${data.phone}</p></td>
           </tr>
-          <tr><td colspan="2" style="height: 6px; line-height: 6px; font-size: 6px;"> </td></tr> <!-- Smaller spacer -->
+          <tr><td colspan="2" style="height: 5px; line-height: 5px; font-size: 5px;"> </td></tr> <!-- Smaller spacer -->
           <tr>
              <td style="${iconCellStyle}">
                 <img src="${emailIconUrl}" alt="E" width="${contactIconSize}" height="${contactIconSize}" style="${contactIconStyle}">
              </td>
              <td style="vertical-align: middle;"><a href="mailto:${data.email}" style="${contactLinkStyle} ${contactStyle}">${data.email}</a></td>
           </tr>
-          <tr><td colspan="2" style="height: 6px; line-height: 6px; font-size: 6px;"> </td></tr>
+          <tr><td colspan="2" style="height: 5px; line-height: 5px; font-size: 5px;"> </td></tr>
           <tr>
              <td style="${iconCellStyle}">
                 <img src="${addressIconUrl}" alt="A" width="${contactIconSize}" height="${contactIconSize}" style="${contactIconStyle}">
@@ -143,9 +145,10 @@ document.addEventListener('DOMContentLoaded', () => {
       <!-- Vertical Divider -->
       <td width="1" style="width: 1px; padding: 0; background-color: ${lightGrayBorder};"><div style="width:1px; line-height: 1px; font-size: 1px;"> </div></td>
       <!-- Right Column: Logo & Static Info -->
-      <td width="42%" style="padding: 15px 15px 15px 30px; vertical-align: top; width: 42%; text-align: left;">
-         ${data.logoHtml ? data.logoHtml : ''} <!-- logoHtml includes width attribute -->
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin-bottom: 6px; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+      <!-- *** REDUCED PADDING *** -->
+      <td width="42%" style="padding: 12px 12px 12px 24px; vertical-align: top; width: 42%; text-align: left;">
+         ${data.logoHtml ? data.logoHtml : ''}
+         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin-bottom: 5px; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
             <tr>
                <td style="${iconCellStyle}">
                   <img src="${phoneIconUrl}" alt="T" width="${contactIconSize}" height="${contactIconSize}" style="${contactIconStyle}">
@@ -153,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
                <td style="vertical-align: middle;"><p style="${contactStyle}">${fixedPhoneRight}</p></td>
             </tr>
          </table>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin-bottom: 12px; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin-bottom: 10px; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
              <tr>
                  <td style="${iconCellStyle}">
                      <a href="${websiteUrl}" target="_blank">
@@ -170,12 +173,14 @@ document.addEventListener('DOMContentLoaded', () => {
     </tr>
   </table>
   <!-- Banner Below Table -->
-  <div style="margin-top: 15px; max-width: 580px; width: 100%;"> <!-- Outer div for width control -->
+  <!-- *** REDUCED MAX-WIDTH FOR BANNER DIV *** -->
+  <div style="margin-top: 12px; max-width: ${signatureMaxWidth}px; width: 100%;">
      <a href="${websiteUrl}" target="_blank" style="${bannerLinkStyle}">
-        <img src="${bannerImageUrl}" alt="Amplitudo Banner" width="${bannerMaxWidth}" style="${bannerStyle}"> <!-- Added width attribute -->
+        <!-- *** UPDATED BANNER WIDTH ATTRIBUTE *** -->
+        <img src="${bannerImageUrl}" alt="Amplitudo Banner" width="${signatureMaxWidth}" style="${bannerStyle}">
      </a>
   </div>
-</div> <!-- End Outer div -->
+</div>
         `;
     }
     // --- *** YOUR CUSTOMIZATION AREA END *** ---
@@ -230,8 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
             jobTitle: displayJobTitle,
             phone: phone,
             email: fullEmail,
-             // *** ADD HTML width attribute to logo ***
-            logoHtml: companyLogoUrl ? `<img src="${companyLogoUrl}" alt="Company Logo" width="${companyLogoWidth}" style="${logoStyle}">` : ''
+            logoHtml: companyLogoUrl ? `<img src="${companyLogoUrl}" alt="Company Logo" width="${companyLogoWidth}" style="${logoStyle}">` : '' // Includes width attribute
         };
 
         try {
@@ -246,51 +250,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     } // End generateSignature
 
-    function copySignaturePreview() {
-        clearCopyStatus();
-        const range = document.createRange();
-        range.selectNodeContents(signaturePreview);
-        const selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range);
-        try {
-            const successful = document.execCommand('copy');
-            setCopyStatus(successful ? 'Signature copied successfully!' : 'Failed to copy signature.', successful);
-        } catch (err) {
-            console.error('Failed to copy signature preview: ', err);
-            setCopyStatus('Error copying signature.', false);
-        }
-        selection.removeAllRanges();
-    }
-
-    function copyHtmlCode() {
-        clearCopyStatus();
-        if (!signatureHtml.value) return;
-        signatureHtml.select();
-        signatureHtml.setSelectionRange(0, 99999);
-        try {
-            navigator.clipboard.writeText(signatureHtml.value).then(() => {
-                setCopyStatus('HTML code copied!', true);
-            }).catch(err => {
-                console.warn('Navigator clipboard failed, trying execCommand: ', err);
-                const successful = document.execCommand('copy');
-                setCopyStatus(successful ? 'HTML code copied! (fallback)' : 'Failed to copy HTML code.', successful);
-            });
-        } catch (err) {
-            console.error('Failed to copy HTML code: ', err);
-            setCopyStatus('Error copying HTML code.', false);
-        }
-    }
-
-    function setCopyStatus(message, success) {
-        copyStatus.textContent = message;
-        copyStatus.className = `copy-status ${success ? 'success' : 'error'}`;
-        setTimeout(clearCopyStatus, 4000);
-    }
-
-    function clearCopyStatus() {
-        copyStatus.textContent = '';
-        copyStatus.className = 'copy-status';
-    }
+    // (copySignaturePreview, copyHtmlCode, setCopyStatus, clearCopyStatus functions remain the same)
+    function copySignaturePreview() { clearCopyStatus(); const range = document.createRange(); range.selectNodeContents(signaturePreview); const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range); try { const successful = document.execCommand('copy'); setCopyStatus(successful ? 'Signature copied successfully!' : 'Failed to copy signature.', successful); } catch (err) { console.error('Failed to copy signature preview: ', err); setCopyStatus('Error copying signature.', false); } selection.removeAllRanges(); }
+    function copyHtmlCode() { clearCopyStatus(); if (!signatureHtml.value) return; signatureHtml.select(); signatureHtml.setSelectionRange(0, 99999); try { navigator.clipboard.writeText(signatureHtml.value).then(() => { setCopyStatus('HTML code copied!', true); }).catch(err => { console.warn('Navigator clipboard failed, trying execCommand: ', err); const successful = document.execCommand('copy'); setCopyStatus(successful ? 'HTML code copied! (fallback)' : 'Failed to copy HTML code.', successful); }); } catch (err) { console.error('Failed to copy HTML code: ', err); setCopyStatus('Error copying HTML code.', false); } }
+    function setCopyStatus(message, success) { copyStatus.textContent = message; copyStatus.className = `copy-status ${success ? 'success' : 'error'}`; setTimeout(clearCopyStatus, 4000); }
+    function clearCopyStatus() { copyStatus.textContent = ''; copyStatus.className = 'copy-status'; }
 
 }); // End DOMContentLoaded
